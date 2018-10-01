@@ -1,0 +1,51 @@
+version : '2'
+services :
+  php54:
+    container_name: cbphp54-fpm
+    build: ./php5 
+    working_dir: "/var/www"
+    volumes:
+        - ./www5:/var/www
+        - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+        - ./php/pool.conf:/usr/local/etc/php/pool.conf:ro
+    expose:
+      - "9000"
+
+  php71:
+    container_name: cbphp71-fpm
+    build: ./php7 
+    working_dir: "/var/www/html"
+    volumes:
+        - ./www7:/var/www
+    expose:
+      - "9000"
+
+  nginx:
+    container_name: cbnginx
+    image: nginx:stable-alpine
+    restart: always
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+      - ./www:/var/www
+    ports:
+      - 80:80
+
+  mysql:
+    container_name: cbmysql
+    image: mysql:5.6
+    environment:
+        MYSQL_ROOT_PASSWORD: rootdocker
+    ports:
+      - 3306:3306
+      
+  pma:
+    image: phpmyadmin/phpmyadmin
+    container_name: cbsqladmin
+    restart: always
+    environment:
+        PMA_HOST : mysql
+    ports:
+      - "8000:80"
+
