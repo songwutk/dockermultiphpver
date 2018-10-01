@@ -1,3 +1,12 @@
 docker-compose run php 5.4 and php 7.1 in seperate www folder.
 
-Please change detail in nginx/conf.d/default.conf and sitephp54.conf
+demo by url 
+
+- http://yoursite.comm
+- http://yoursite5.com
+
+You can access by add 127.0.0.1 in /etc/hosts  (Local DNS Record)
+
+Please change detail in nginx/conf.d/default.conf and sitephp54.conf for your project.
+
+
