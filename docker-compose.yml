@@ -14,7 +14,7 @@ services :
   php71:
     container_name: cbphp71-fpm
     build: ./php7 
-    working_dir: "/var/www/html"
+    working_dir: "/var/www"
     volumes:
         - ./www7:/var/www
     expose:
